@@ -6,3 +6,5 @@ CMD rm /etc/nginx/conf.d/* && \
     rm /etc/nginx/nginx.conf
 
 COPY nginx.conf.template /etc/nginx/templates/nginx.conf.template
+
+CMD ["nginx", "-g", "daemon off;"]
