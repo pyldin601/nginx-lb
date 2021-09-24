@@ -1,3 +1,13 @@
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
 stream {
     upstream target_https {
         server ${TARGET_HTTPS_HOST} max_fails=3 fail_timeout=10s;
