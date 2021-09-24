@@ -1,0 +1,21 @@
+stream {
+    upstream target_https {
+        server ${TARGET_HTTPS_HOST} max_fails=3 fail_timeout=10s;
+    }
+
+    upstream target_http {
+        server ${TARGET_HTTP_HOST} max_fails=3 fail_timeout=10s;
+    }
+
+    server {
+        listen 8443;
+        proxy_pass target_https;
+        proxy_next_upstream on;
+    }
+
+    server {
+        listen 8000;
+        proxy_pass target_http;
+        proxy_next_upstream on;
+    }
+}
